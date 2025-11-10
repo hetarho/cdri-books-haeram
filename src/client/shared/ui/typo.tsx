@@ -11,11 +11,11 @@ const Title3 = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Body1 = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-[20px]">{children}</p>;
+  return <p className="text-[20px] font-medium">{children}</p>;
 };
 
 const Body2 = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-sm">{children}</p>;
+  return <p className="text-sm font-medium">{children}</p>;
 };
 
 const Body2Bold = ({ children }: { children: React.ReactNode }) => {
@@ -23,11 +23,11 @@ const Body2Bold = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Caption = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-base">{children}</p>;
+  return <p className="text-base font-medium">{children}</p>;
 };
 
 const Small = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-[10px]">{children}</p>;
+  return <p className="text-[10px] font-medium">{children}</p>;
 };
 
 export const Typography = {
