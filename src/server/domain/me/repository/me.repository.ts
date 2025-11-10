@@ -58,7 +58,7 @@ function isSameBook(a: Book, b: Book): boolean {
     a.description === b.description &&
     a.price === b.price &&
     (a.salePrice ?? null) === (b.salePrice ?? null) &&
-    arrayShallowEqual(a.authors, b.authors)
+    arrayShallowEqual([...a.authors].sort(), [...b.authors].sort())
   );
 }
 
