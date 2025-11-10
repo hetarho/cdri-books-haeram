@@ -21,7 +21,7 @@ export class ListBookUsecase {
         salePrice: book.sale_price,
       })),
       totalCount: meta.total_count,
-      hasNext: meta.is_end,
+      hasNext: !meta.is_end,
     };
   }
 }
