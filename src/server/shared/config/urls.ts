@@ -1,0 +1,1 @@
+export const KAKAO_API_BASE_URL = process.env.KAKAO_API_BASE_URL;
