@@ -7,6 +7,8 @@
   --color-gray: #dadada;
   --color-light-gray: #f2f4f6;
 
+  --color-surface-default: #ffffff;
+
   --color-text-primary: #353c49;
   --color-text-secondary: #6d7582;
   --color-text-subtitle: #8d94a0;
@@ -14,8 +16,7 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-surface-default);
   font-family: var(--font-noto-sans-kr);
   color: var(--color-text-default);
 }
