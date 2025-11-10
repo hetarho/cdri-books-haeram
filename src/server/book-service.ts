@@ -12,12 +12,14 @@ export class BookService {
   async listBooks(request: {
     page: number;
     size: number;
-    query?: string;
+    query: string;
     searchType: BookSearchType;
     sort: BookSortType;
   }): Promise<{
     books: Book[];
     totalCount: number;
+    totalPage: number;
+    currentPage: number;
     hasNext: boolean;
   }> {
     return Container.get(ListBookUsecase).execute(request);

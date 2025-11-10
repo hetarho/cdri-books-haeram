@@ -12,7 +12,7 @@ export interface IBookRepository {
   }: {
     page: number;
     size: number;
-    query?: string;
+    query: string;
     searchType: BookSearchType;
     sort: BookSortType;
   }): Promise<{
