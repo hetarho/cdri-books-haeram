@@ -7,6 +7,8 @@ export interface IBookRepository {
     page,
     size,
     query,
+    searchType,
+    sort,
   }: {
     page: number;
     size: number;
