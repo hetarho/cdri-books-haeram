@@ -1,33 +1,84 @@
-const Title1 = ({ children }: { children: React.ReactNode }) => {
-  return <h1 className="text-2xl font-bold">{children}</h1>;
+import { ComponentProps } from 'react';
+import { cn } from '../utils';
+
+const Title1 = ({ className, children, ...props }: ComponentProps<'h1'>) => {
+  return (
+    <h1 className={cn('text-2xl font-bold', className)} {...props}>
+      {children}
+    </h1>
+  );
 };
 
-const Title2 = ({ children }: { children: React.ReactNode }) => {
-  return <h2 className="text-[22px] font-bold">{children}</h2>;
+const Title2 = ({ className, children, ...props }: ComponentProps<'h2'>) => {
+  return (
+    <h2 className={cn('text-[22px] font-bold', className)} {...props}>
+      {children}
+    </h2>
+  );
 };
 
-const Title3 = ({ children }: { children: React.ReactNode }) => {
-  return <h3 className="text-lg font-bold">{children}</h3>;
+const Title3 = ({ className, children, ...props }: ComponentProps<'h3'>) => {
+  return (
+    <h3 className={cn('text-lg font-bold', className)} {...props}>
+      {children}
+    </h3>
+  );
 };
 
-const Body1 = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-[20px] font-medium">{children}</p>;
+const Body1 = ({ className, children, ...props }: ComponentProps<'p'>) => {
+  return (
+    <p className={cn('text-[20px] font-medium', className)} {...props}>
+      {children}
+    </p>
+  );
 };
 
-const Body2 = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-sm font-medium">{children}</p>;
+const Body2 = ({ className, children, ...props }: ComponentProps<'p'>) => {
+  return (
+    <p className={cn('text-sm font-medium', className)} {...props}>
+      {children}
+    </p>
+  );
 };
 
-const Body2Bold = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-sm font-bold">{children}</p>;
+const Body2Bold = ({ className, children, ...props }: ComponentProps<'p'>) => {
+  return (
+    <p className={cn('text-sm font-bold', className)} {...props}>
+      {children}
+    </p>
+  );
 };
 
-const Caption = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-base font-medium">{children}</p>;
+const Caption = ({ className, children, ...props }: ComponentProps<'p'>) => {
+  return (
+    <p className={cn('text-base font-medium', className)} {...props}>
+      {children}
+    </p>
+  );
 };
 
-const Small = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-[10px] font-medium">{children}</p>;
+const Small = ({ className, children, ...props }: ComponentProps<'p'>) => {
+  return (
+    <p className={cn('text-[10px] font-medium', className)} {...props}>
+      {children}
+    </p>
+  );
+};
+
+const Heading3Bold = ({ className, children, ...props }: ComponentProps<'h3'>) => {
+  return (
+    <h3 className={cn('text-[18px] font-bold', className)} {...props}>
+      {children}
+    </h3>
+  );
+};
+
+const Heading3Thin = ({ className, children, ...props }: ComponentProps<'h3'>) => {
+  return (
+    <h3 className={cn('text-[18px] font-light', className)} {...props}>
+      {children}
+    </h3>
+  );
 };
 
 export const Typography = {
@@ -39,4 +90,6 @@ export const Typography = {
   Body2Bold,
   Caption,
   Small,
+  Heading3Bold,
+  Heading3Thin,
 };

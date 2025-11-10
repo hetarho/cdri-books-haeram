@@ -29,7 +29,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        'flex h-9.5 items-center justify-between gap-2 border-b border-[#D2D6DA] text-sm font-bold',
+        'flex h-9 items-center justify-between gap-2 border-b border-[#D2D6DA] text-sm font-bold',
         className,
       )}
       {...props}
