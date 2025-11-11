@@ -70,33 +70,32 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
     handlePopoverOpenChange(false);
   }, [onSubmit, popoverSearch, popoverSearchType, resetPopoverInput, handlePopoverOpenChange]);
 
-  return {
-    // SearchInput props
-    searchInput,
-    setSearchInput,
-    isOverlayOpen,
-    history,
-    onOverlayClose: closeOverlay,
-    onInputFocus: handleInputFocus,
-    onHistoryClick: handleHistoryClick,
-    onDeleteHistory: handleDeleteHistory,
-    onQuickSearch: handleQuickSearch,
+  const handlePopoverSearchTypeChange = useCallback((nextType: BookSearchType) => {
+    setPopoverSearchType(nextType);
+    setSearchType(nextType);
+  }, []);
 
-    // Popover props
-    popoverOpen,
-    popoverSearch,
-    popoverSearchType,
-    setPopoverSearch,
-    setPopoverSearchType: (nextType: BookSearchType) => {
-      setPopoverSearchType(nextType);
-      setSearchType(nextType);
+  return {
+    searchInput: {
+      inputValue: searchInput,
+      setInputValue: setSearchInput,
+      isOverlayOpen,
+      history,
+      onOverlayClose: closeOverlay,
+      onInputFocus: handleInputFocus,
+      onHistoryClick: handleHistoryClick,
+      onDeleteHistory: handleDeleteHistory,
+      onQuickSearch: handleQuickSearch,
     },
-    handlePopoverOpenChange: (open: boolean) => {
-      handlePopoverOpenChange(open);
-      if (open) {
-        setSearchInput('');
-      }
+
+    popover: {
+      open: popoverOpen,
+      search: popoverSearch,
+      popoverSearchType,
+      setSearch: setPopoverSearch,
+      setPopoverSearchType: handlePopoverSearchTypeChange,
+      handlePopoverOpenChange: handlePopoverOpenChange,
+      handlePopoverSubmit,
     },
-    handlePopoverSubmit,
   };
 }
