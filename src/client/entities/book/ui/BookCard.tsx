@@ -20,6 +20,7 @@ export function BookCard({
 
   return (
     <div
+      data-testid="book-card"
       className={cn(
         'flex h-25 w-full shrink-0 items-center overflow-hidden border-b border-[#D2D6DA] pl-12 transition-all duration-300',
         {
@@ -50,6 +51,8 @@ export function BookCard({
           onClick={onClickLikeButton}
           aria-pressed={isLiked}
           aria-label={isLiked ? '찜 취소' : '찜'}
+          data-testid="like-button"
+          data-liked={isLiked}
         >
           {isLiked ? (
             <Icon.HeartFill className="fill-red h-full w-full" />
@@ -65,19 +68,21 @@ export function BookCard({
       >
         <div className="flex">
           <Typography.Title3
+            data-testid="book-title"
             className={cn('min-w-0 flex-1', {
               truncate: !isOpen,
             })}
           >
             {book.title}
           </Typography.Title3>
-          <Typography.Body2 className="text-text-secondary ml-4 shrink-0 truncate">
+          <Typography.Body2 data-testid="book-author" className="text-text-secondary ml-4 shrink-0 truncate">
             {book.authors.length < 3
               ? book.authors.join(', ')
               : `${book.authors.slice(0, 2).join(', ')} 외 ${book.authors.length - 2}명`}
           </Typography.Body2>
         </div>
         <div
+          data-testid="book-description"
           className={cn('text-text-secondary h-0 overflow-hidden opacity-0 transition-all duration-300', {
             'h-auto opacity-100': isOpen,
           })}
@@ -91,8 +96,9 @@ export function BookCard({
           'h-full flex-col-reverse items-end': isOpen,
         })}
       >
-        {!isOpen && <Typography.Title3 className="ml-5.5 shrink-0">{`${book.price}원`}</Typography.Title3>}
+        {!isOpen && <Typography.Title3 data-testid="book-price" className="ml-5.5 shrink-0">{`${book.price}원`}</Typography.Title3>}
         <Button
+          data-testid="buy-button"
           className={cn('ml-14 w-[115px] shrink-0 transition-all duration-300', {
             'w-60': isOpen,
           })}
@@ -116,7 +122,12 @@ export function BookCard({
             )}
           </div>
         )}
-        <Button variant="mono" className="ml-2 w-[115px] shrink-0 gap-[5px]" onClick={() => setIsOpen(!isOpen)}>
+        <Button 
+          data-testid="detail-button" 
+          variant="mono" 
+          className="ml-2 w-[115px] shrink-0 gap-[5px]" 
+          onClick={() => setIsOpen(!isOpen)}
+        >
           상세보기
           <Icon.ChevronUp
             className={cn('h-2 w-3.5 rotate-180 fill-[#B1B8C0] transition-all duration-300', {

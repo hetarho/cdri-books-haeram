@@ -34,8 +34,14 @@ pnpm start
 # 린트 검사
 pnpm lint
 
-# 테스트 실행
+# 단위 테스트 실행
 pnpm test
+
+# E2E 테스트 실행 (Cypress GUI)
+pnpm cypress open
+
+# E2E 테스트 실행 (헤드리스)
+pnpm cypress run
 ```
 
 ### 환경 변수 설정
@@ -174,6 +180,11 @@ src/
 - Vite 기반의 빠른 테스트 러너
 - Jest 호환 API 및 ESM 네이티브 지원
 
+**Cypress + Cucumber**
+- BDD 방식의 E2E 테스트
+- Gherkin 문법으로 가독성 높은 테스트 시나리오
+- 실제 사용자 관점의 통합 테스트
+
 ## ⭐ 강조하고 싶은 기능
 
 ### 1. **Feature-Sliced Design 아키텍처**
@@ -215,6 +226,17 @@ Intersection Observer API를 활용하여 스크롤 이벤트 리스너 없이 �
 - 컴파일 타임에 타입 에러 발견
 - IDE 자동완성으로 개발 생산성 향상
 - 리팩토링 시 안전성 보장
+
+### 5. **BDD 기반 E2E 테스트**
+
+Cypress와 Cucumber를 활용한 행동 주도 개발(BDD) 방식의 E2E 테스트를 구현했습니다.
+
+**테스트 범위:**
+- 도서 검색 및 무한 스크롤
+- 상세 검색 및 검색 히스토리
+- 찜하기 기능 및 네비게이션
+- Gherkin 문법으로 작성된 읽기 쉬운 시나리오
+- 6개 feature 파일, 40+ 시나리오
 
 ## 📝 라이센스
 

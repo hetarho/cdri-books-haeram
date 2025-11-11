@@ -1,12 +1,19 @@
 'use client';
 
-import { EmptyBookPlaceholder, useLikeBook, useListBook, useListLikeBook, useUnlikeBook, useUpdateBookHistory } from '@client/entities';
+import {
+  EmptyBookPlaceholder,
+  useLikeBook,
+  useListBook,
+  useListLikeBook,
+  useUnlikeBook,
+} from '@client/entities';
 import { BookCard } from '@client/entities';
 import { Typography } from '@client/shared';
 import { useCallback, useState } from 'react';
 import { BookSearchType, BookSortType } from '@shared/types/book';
 import { InfinityContainer } from '@client/shared/ui/InfinityContainer';
 import { BookSearch } from '@client/widget';
+import { useUpdateBookHistory } from '@client/features';
 
 export function HomePage() {
   const [search, setSearch] = useState('');

@@ -72,7 +72,7 @@ export function SearchInput({
       {history.length > 0 && isOverlayOpen && (
         <div className="bg-light-gray absolute top-full left-0 flex w-full flex-col gap-4 rounded-b-3xl py-6 pr-6 pl-[51px] z-10">
           {history.map((item) => (
-            <div key={item} className="flex justify-between">
+            <div key={item} data-testid="history-item" className="flex justify-between">
               <Typography.Caption
                 className="text-text-subtitle flex-1 cursor-pointer"
                 onClick={() => {
@@ -83,6 +83,7 @@ export function SearchInput({
               </Typography.Caption>
               <Icon.Close
                 className="shrink-0 cursor-pointer fill-[#222222]"
+                aria-label="삭제"
                 onClick={() => {
                   onDeleteHistory(item);
                 }}
