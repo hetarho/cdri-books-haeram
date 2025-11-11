@@ -1,6 +1,6 @@
 'use client';
 
-import { useListBook, useUpdateBookHistory } from '@client/entities';
+import { EmptyBookPlaceholder, useLikeBook, useListBook, useListLikeBook, useUnlikeBook, useUpdateBookHistory } from '@client/entities';
 import { BookCard } from '@client/entities';
 import { Typography } from '@client/shared';
 import { useCallback, useState } from 'react';
@@ -12,6 +12,9 @@ export function HomePage() {
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState<BookSearchType>(BookSearchType.TITLE);
   const { updateBookHistory } = useUpdateBookHistory();
+  const { mutate: likeBook } = useLikeBook();
+  const { mutate: unlikeBook } = useUnlikeBook();
+  const { data: likeBooks } = useListLikeBook();
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useListBook({
     searchType,
@@ -55,12 +58,21 @@ export function HomePage() {
           <BookCard
             key={book.url}
             book={book}
+            onClickLikeButton={() => {
+              if (likeBooks?.some((likeBook) => likeBook.url === book.url)) {
+                unlikeBook(book);
+              } else {
+                likeBook(book);
+              }
+            }}
+            isLiked={likeBooks?.some((likeBook) => likeBook.url === book.url) ?? false}
             onClickBuyButton={() => {
               if (!book.url) return;
               window.open(book.url, '_blank', 'noopener,noreferrer');
             }}
           />
         ))}
+        {books.length === 0 && <EmptyBookPlaceholder title="검색된 결과가 없습니다." />}
       </InfinityContainer>
     </div>
   );
