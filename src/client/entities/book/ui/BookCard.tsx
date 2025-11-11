@@ -45,9 +45,11 @@ export function BookCard({
           variant="icon"
           size="icon"
           className={cn('absolute top-0 right-0 size-4 transition-all duration-300', {
-            'size-6 right-2 top-2': isOpen,
+            'top-2 right-2 size-6': isOpen,
           })}
           onClick={onClickLikeButton}
+          aria-pressed={isLiked}
+          aria-label={isLiked ? '찜 취소' : '찜'}
         >
           {isLiked ? (
             <Icon.HeartFill className="fill-red h-full w-full" />
