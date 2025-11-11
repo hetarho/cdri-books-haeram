@@ -56,6 +56,7 @@ export function HomePage() {
             key={book.url}
             book={book}
             onClickBuyButton={() => {
+              if (!book.url) return;
               window.open(book.url, '_blank', 'noopener,noreferrer');
             }}
           />
