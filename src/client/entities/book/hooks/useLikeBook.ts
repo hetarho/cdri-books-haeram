@@ -10,6 +10,9 @@ export function useLikeBook() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['like-book'] });
     },
+    onError: (error) => {
+      console.error('Failed to like book', error);
+    },
   });
 }
 

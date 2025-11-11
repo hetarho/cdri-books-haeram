@@ -10,6 +10,9 @@ export function useUnlikeBook() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['like-book'] });
     },
+    onError: (error) => {
+      console.error('Failed to unlike book', error);
+    },
   });
 }
 

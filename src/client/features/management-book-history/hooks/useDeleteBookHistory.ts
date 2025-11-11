@@ -9,5 +9,8 @@ export function useDeleteBookHistory() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['book-history'] });
     },
+    onError: (error) => {
+      console.error('Failed to delete book history', error);
+    },
   });
 }

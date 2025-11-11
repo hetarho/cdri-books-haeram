@@ -9,5 +9,8 @@ export function useUpdateBookHistory() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['book-history'] });
     },
+    onError: (error) => {
+      console.error('Failed to update book history', error);
+    },
   });
 }
