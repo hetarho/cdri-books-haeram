@@ -6,6 +6,7 @@ export type Book = {
   salePrice?: number;
   thumbnail?: string;
   url?: string;
+  isbn: string;
 };
 
 export enum BookSearchType {

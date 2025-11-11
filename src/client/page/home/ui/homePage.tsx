@@ -56,16 +56,16 @@ export function HomePage() {
       >
         {books.map((book) => (
           <BookCard
-            key={book.url}
+            key={book.isbn}
             book={book}
             onClickLikeButton={() => {
-              if (likeBooks?.some((likeBook) => likeBook.url === book.url)) {
+              if (likeBooks?.some((likeBook) => likeBook.isbn === book.isbn)) {
                 unlikeBook(book);
               } else {
                 likeBook(book);
               }
             }}
-            isLiked={likeBooks?.some((likeBook) => likeBook.url === book.url) ?? false}
+            isLiked={likeBooks?.some((likeBook) => likeBook.isbn === book.isbn) ?? false}
             onClickBuyButton={() => {
               if (!book.url) return;
               window.open(book.url, '_blank', 'noopener,noreferrer');
