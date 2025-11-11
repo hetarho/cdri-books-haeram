@@ -56,7 +56,7 @@ export function SearchInput({
   };
 
   return (
-    <div ref={containerRef} className="relative w-120">
+    <div ref={containerRef} className="relative w-full max-w-120">
       <Icon.Search className="absolute top-1/2 left-2.5 -translate-y-1/2 fill-[#353C49]" />
       <Input
         type="text"
