@@ -28,7 +28,6 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
   const { deleteBookHistory } = useDeleteBookHistory();
   const [history, setHistory] = useState<string[]>([]);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [isPointerOverOverlay, setIsPointerOverOverlay] = useState(false);
 
   const refreshHistory = useCallback(() => {
     setHistory(getBookHistory());
@@ -44,20 +43,6 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
   const handleInputFocus = useCallback(() => {
     openOverlay();
   }, [openOverlay]);
-
-  const handleInputBlur = useCallback(() => {
-    if (!isPointerOverOverlay) {
-      closeOverlay();
-    }
-  }, [isPointerOverOverlay, closeOverlay]);
-
-  const handleMouseEnter = useCallback(() => {
-    setIsPointerOverOverlay(true);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsPointerOverOverlay(false);
-  }, []);
 
   const handleDeleteHistory = useCallback(
     (item: string) => {
@@ -100,9 +85,6 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
     history,
     onOverlayClose: closeOverlay,
     onInputFocus: handleInputFocus,
-    onInputBlur: handleInputBlur,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
     onHistoryClick: handleHistoryClick,
     onDeleteHistory: handleDeleteHistory,
     onQuickSearch: handleQuickSearch,

@@ -25,9 +25,6 @@ export function BookSearch({
     history,
     onOverlayClose,
     onInputFocus,
-    onInputBlur,
-    onMouseEnter,
-    onMouseLeave,
     onHistoryClick,
     onDeleteHistory,
     onQuickSearch,
@@ -50,9 +47,6 @@ export function BookSearch({
         history={history}
         onOverlayClose={onOverlayClose}
         onInputFocus={onInputFocus}
-        onInputBlur={onInputBlur}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
         onHistoryClick={onHistoryClick}
         onDeleteHistory={onDeleteHistory}
       />

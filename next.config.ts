@@ -9,11 +9,15 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'search1.kakaocdn.net',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'search2.kakaocdn.net',
+        pathname: '/**',
       },
     ],
   },
 };
+
+export default nextConfig;
