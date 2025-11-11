@@ -5,8 +5,15 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['search1.kakaocdn.net', 'search2.kakaocdn.net'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'search1.kakaocdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'search2.kakaocdn.net',
+      },
+    ],
   },
 };
-
-export default nextConfig;
