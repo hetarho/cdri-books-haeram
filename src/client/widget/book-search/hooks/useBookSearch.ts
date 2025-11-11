@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { BookSearchType } from '@shared/types/book';
-import { useBookHistory } from '@client/entities';
-import { useDeleteBookHistory } from '@client/entities';
+import { useBookHistory, useDeleteBookHistory } from '@client/features';
 
 export type UseBookSearchParams = {
   onSubmit: (params: { search: string; searchType: BookSearchType }) => void;
@@ -24,19 +23,13 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
 
   const resetPopoverInput = useCallback(() => setPopoverSearch(''), []);
 
-  const { getBookHistory } = useBookHistory();
-  const { deleteBookHistory } = useDeleteBookHistory();
-  const [history, setHistory] = useState<string[]>([]);
+  const { data: history = [] } = useBookHistory();
+  const { mutate: deleteBookHistory } = useDeleteBookHistory();
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
-  const refreshHistory = useCallback(() => {
-    setHistory(getBookHistory());
-  }, [getBookHistory]);
-
   const openOverlay = useCallback(() => {
-    refreshHistory();
     setIsOverlayOpen(true);
-  }, [refreshHistory]);
+  }, []);
 
   const closeOverlay = useCallback(() => setIsOverlayOpen(false), []);
 
@@ -47,9 +40,8 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
   const handleDeleteHistory = useCallback(
     (item: string) => {
       deleteBookHistory(item);
-      refreshHistory();
     },
-    [deleteBookHistory, refreshHistory],
+    [deleteBookHistory],
   );
 
   const handleQuickSearch = useCallback(
@@ -77,33 +69,32 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
     handlePopoverOpenChange(false);
   }, [onSubmit, popoverSearch, popoverSearchType, resetPopoverInput, handlePopoverOpenChange]);
 
-  return {
-    // SearchInput props
-    searchInput,
-    setSearchInput,
-    isOverlayOpen,
-    history,
-    onOverlayClose: closeOverlay,
-    onInputFocus: handleInputFocus,
-    onHistoryClick: handleHistoryClick,
-    onDeleteHistory: handleDeleteHistory,
-    onQuickSearch: handleQuickSearch,
+  const handlePopoverSearchTypeChange = useCallback((nextType: BookSearchType) => {
+    setPopoverSearchType(nextType);
+    setSearchType(nextType);
+  }, []);
 
-    // Popover props
-    popoverOpen,
-    popoverSearch,
-    popoverSearchType,
-    setPopoverSearch,
-    setPopoverSearchType: (nextType: BookSearchType) => {
-      setPopoverSearchType(nextType);
-      setSearchType(nextType);
+  return {
+    searchInput: {
+      inputValue: searchInput,
+      setInputValue: setSearchInput,
+      isOverlayOpen,
+      history,
+      onOverlayClose: closeOverlay,
+      onInputFocus: handleInputFocus,
+      onHistoryClick: handleHistoryClick,
+      onDeleteHistory: handleDeleteHistory,
+      onQuickSearch: handleQuickSearch,
     },
-    handlePopoverOpenChange: (open: boolean) => {
-      handlePopoverOpenChange(open);
-      if (open) {
-        setSearchInput('');
-      }
+
+    popover: {
+      open: popoverOpen,
+      search: popoverSearch,
+      popoverSearchType,
+      setSearch: setPopoverSearch,
+      setPopoverSearchType: handlePopoverSearchTypeChange,
+      handlePopoverOpenChange: handlePopoverOpenChange,
+      handlePopoverSubmit,
     },
-    handlePopoverSubmit,
   };
 }

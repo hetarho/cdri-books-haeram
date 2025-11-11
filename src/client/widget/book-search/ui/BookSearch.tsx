@@ -18,49 +18,30 @@ export function BookSearch({
   className?: string;
   onSubmit: (params: BookSearchSubmitParams) => void;
 }) {
-  const {
-    searchInput,
-    setSearchInput,
-    isOverlayOpen,
-    history,
-    onOverlayClose,
-    onInputFocus,
-    onHistoryClick,
-    onDeleteHistory,
-    onQuickSearch,
-    popoverOpen,
-    popoverSearch,
-    popoverSearchType,
-    setPopoverSearch,
-    setPopoverSearchType,
-    handlePopoverOpenChange,
-    handlePopoverSubmit,
-  } = useBookSearch({ onSubmit });
+  const { popover, searchInput } = useBookSearch({ onSubmit });
 
   return (
     <div className={cn('flex items-center gap-2', className)}>
       <SearchInput
-        onSearch={onQuickSearch}
-        value={searchInput}
-        onChange={setSearchInput}
-        isOverlayOpen={isOverlayOpen}
-        history={history}
-        onOverlayClose={onOverlayClose}
-        onInputFocus={onInputFocus}
-        onHistoryClick={onHistoryClick}
-        onDeleteHistory={onDeleteHistory}
+        onSearch={searchInput.onQuickSearch}
+        value={searchInput.inputValue}
+        onChange={searchInput.setInputValue}
+        isOverlayOpen={searchInput.isOverlayOpen}
+        history={searchInput.history}
+        onOverlayClose={searchInput.onOverlayClose}
+        onInputFocus={searchInput.onInputFocus}
+        onHistoryClick={searchInput.onHistoryClick}
+        onDeleteHistory={searchInput.onDeleteHistory}
       />
       <BookSearchPopover
-        open={popoverOpen}
-        search={popoverSearch}
-        searchType={popoverSearchType}
-        onOpenChange={handlePopoverOpenChange}
-        onSearchChange={setPopoverSearch}
-        onSearchTypeChange={setPopoverSearchType}
-        onSubmit={handlePopoverSubmit}
+        open={popover.open}
+        search={popover.search}
+        searchType={popover.popoverSearchType}
+        onOpenChange={popover.handlePopoverOpenChange}
+        onSearchChange={popover.setSearch}
+        onSearchTypeChange={popover.setPopoverSearchType}
+        onSubmit={popover.handlePopoverSubmit}
       />
     </div>
   );
 }
-
-

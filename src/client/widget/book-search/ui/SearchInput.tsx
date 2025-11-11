@@ -70,7 +70,7 @@ export function SearchInput({
         onFocus={onInputFocus}
       />
       {history.length > 0 && isOverlayOpen && (
-        <div className="bg-light-gray absolute top-full left-0 flex w-full flex-col gap-4 rounded-b-3xl py-6 pr-6 pl-[51px]">
+        <div className="bg-light-gray absolute top-full left-0 flex w-full flex-col gap-4 rounded-b-3xl py-6 pr-6 pl-[51px] z-10">
           {history.map((item) => (
             <div key={item} className="flex justify-between">
               <Typography.Caption

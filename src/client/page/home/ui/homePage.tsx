@@ -1,6 +1,6 @@
 'use client';
 
-import { useListBook, useUpdateBookHistory } from '@client/entities';
+import { EmptyBookPlaceholder, useLikeBook, useListBook, useListLikeBook, useUnlikeBook, useUpdateBookHistory } from '@client/entities';
 import { BookCard } from '@client/entities';
 import { Typography } from '@client/shared';
 import { useCallback, useState } from 'react';
@@ -11,9 +11,12 @@ import { BookSearch } from '@client/widget';
 export function HomePage() {
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState<BookSearchType>(BookSearchType.TITLE);
-  const { updateBookHistory } = useUpdateBookHistory();
+  const { mutate: updateBookHistory } = useUpdateBookHistory();
+  const { mutate: likeBook } = useLikeBook();
+  const { mutate: unlikeBook } = useUnlikeBook();
+  const { data: likeBooks } = useListLikeBook();
 
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useListBook({
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading, isError } = useListBook({
     searchType,
     sort: BookSortType.ACCURACY,
     query: search,
@@ -28,6 +31,14 @@ export function HomePage() {
       fetchNextPage();
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   return (
     <div className="flex min-h-0 w-full max-w-240 flex-1 flex-col items-center pt-26 pb-20">
@@ -53,14 +64,23 @@ export function HomePage() {
       >
         {books.map((book) => (
           <BookCard
-            key={book.url}
+            key={book.isbn}
             book={book}
+            onClickLikeButton={() => {
+              if (likeBooks?.some((likeBook) => likeBook.isbn === book.isbn)) {
+                unlikeBook(book);
+              } else {
+                likeBook(book);
+              }
+            }}
+            isLiked={likeBooks?.some((likeBook) => likeBook.isbn === book.isbn) ?? false}
             onClickBuyButton={() => {
               if (!book.url) return;
               window.open(book.url, '_blank', 'noopener,noreferrer');
             }}
           />
         ))}
+        {books.length === 0 && <EmptyBookPlaceholder title="검색된 결과가 없습니다." />}
       </InfinityContainer>
     </div>
   );

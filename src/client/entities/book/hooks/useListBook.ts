@@ -35,5 +35,6 @@ export function useListBook({
       }),
     getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.currentPage + 1 : undefined),
     initialPageParam: page ?? 1,
+    enabled: !!query && !!searchType && !!sort && !!page && !!size,
   });
 }

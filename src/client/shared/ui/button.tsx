@@ -10,10 +10,12 @@ const buttonVariants = cva('flex items-center justify-center rounded-lg cursor-p
       primary: 'bg-primary text-white hover:bg-primary/90',
       mono: 'bg-light-gray hover:bg-light-gray/90 text-text-secondary',
       outlineMono: 'border border-text-subtitle text-text-subtitle',
+      icon: '',
     },
     size: {
       l: 'h-12 px-2.5 font-medium',
       s: 'h-9 px-2.5 py-2',
+      icon: 'size-4 p-0',
     },
   },
   defaultVariants: {

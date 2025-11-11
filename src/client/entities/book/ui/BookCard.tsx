@@ -5,7 +5,17 @@ import { Book } from '@shared/types/book';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export function BookCard({ book, onClickBuyButton }: { book: Book; onClickBuyButton: () => void }) {
+export function BookCard({
+  book,
+  onClickBuyButton,
+  onClickLikeButton,
+  isLiked,
+}: {
+  book: Book;
+  onClickBuyButton: () => void;
+  onClickLikeButton: () => void;
+  isLiked: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,17 +27,37 @@ export function BookCard({ book, onClickBuyButton }: { book: Book; onClickBuyBut
         },
       )}
     >
-      {book.thumbnail && (
-        <Image
-          src={book.thumbnail}
-          alt={book.title}
-          width={isOpen ? 210 : 48}
-          height={isOpen ? 280 : 68}
-          className={cn('h-17 w-12 transition-all duration-300', {
-            'h-70 w-52.5': isOpen,
+      <div
+        className={cn('relative h-17 w-12 transition-all duration-300', {
+          'h-70 w-52.5': isOpen,
+        })}
+      >
+        {book.thumbnail && (
+          <Image
+            src={book.thumbnail}
+            alt={book.title}
+            width={isOpen ? 210 : 48}
+            height={isOpen ? 280 : 68}
+            className={cn('h-full w-full object-cover transition-all duration-300')}
+          />
+        )}
+        <Button
+          variant="icon"
+          size="icon"
+          className={cn('absolute top-0 right-0 size-4 transition-all duration-300', {
+            'top-2 right-2 size-6': isOpen,
           })}
-        />
-      )}
+          onClick={onClickLikeButton}
+          aria-pressed={isLiked}
+          aria-label={isLiked ? '찜 취소' : '찜'}
+        >
+          {isLiked ? (
+            <Icon.HeartFill className="fill-red h-full w-full" />
+          ) : (
+            <Icon.HeartLine className="h-full w-full fill-white" />
+          )}
+        </Button>
+      </div>
       <div
         className={cn('ml-12 flex h-full min-w-0 flex-1 flex-col justify-center', {
           'ml-8 justify-start': isOpen,

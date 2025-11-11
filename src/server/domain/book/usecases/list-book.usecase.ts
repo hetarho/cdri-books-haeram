@@ -21,6 +21,7 @@ export class ListBookUsecase {
         salePrice: book.sale_price,
         thumbnail: book.thumbnail,
         url: book.url,
+        isbn: book.isbn,
       })),
       totalCount: meta.total_count,
       totalPage: meta.pageable_count,
