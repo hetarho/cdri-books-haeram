@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@client/shared';
 
-const buttonVariants = cva('flex items-center justify-center rounded-lg', {
+const buttonVariants = cva('flex items-center justify-center rounded-lg cursor-pointer', {
   variants: {
     variant: {
       primary: 'bg-primary text-white hover:bg-primary/90',

@@ -19,9 +19,13 @@ export class ListBookUsecase {
         authors: book.authors,
         price: book.price,
         salePrice: book.sale_price,
+        thumbnail: book.thumbnail,
+        url: book.url,
       })),
       totalCount: meta.total_count,
+      totalPage: meta.pageable_count,
       hasNext: !meta.is_end,
+      currentPage: request.page,
     };
   }
 }
@@ -29,7 +33,7 @@ export class ListBookUsecase {
 interface ListBookRequest {
   page: number;
   size: number;
-  query?: string;
+  query: string;
   searchType: BookSearchType;
   sort: BookSortType;
 }
@@ -37,5 +41,7 @@ interface ListBookRequest {
 interface ListBookResponse {
   books: Book[];
   totalCount: number;
+  totalPage: number;
+  currentPage: number;
   hasNext: boolean;
 }

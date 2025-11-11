@@ -4,6 +4,8 @@ export type Book = {
   authors: string[];
   price: number;
   salePrice?: number;
+  thumbnail?: string;
+  url?: string;
 };
 
 export enum BookSearchType {

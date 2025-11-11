@@ -17,7 +17,7 @@ export class BookRepository implements IBookRepository {
   async findAll(request: {
     page: number;
     size: number;
-    query?: string;
+    query: string;
     searchType: BookSearchType;
     sort: BookSortType;
   }): Promise<{
@@ -29,7 +29,7 @@ export class BookRepository implements IBookRepository {
     };
   }> {
     const query = makeQuery([
-      { key: 'query', value: request.query ?? '' },
+      { key: 'query', value: request.query},
       { key: 'page', value: request.page.toString() },
       { key: 'size', value: request.size.toString() },
       { key: 'sort', value: request.sort },
