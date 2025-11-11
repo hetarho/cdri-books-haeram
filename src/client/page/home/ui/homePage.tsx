@@ -16,7 +16,7 @@ export function HomePage() {
   const { mutate: unlikeBook } = useUnlikeBook();
   const { data: likeBooks } = useListLikeBook();
 
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useListBook({
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading, isError } = useListBook({
     searchType,
     sort: BookSortType.ACCURACY,
     query: search,
@@ -31,6 +31,14 @@ export function HomePage() {
       fetchNextPage();
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   return (
     <div className="flex min-h-0 w-full max-w-240 flex-1 flex-col items-center pt-26 pb-20">

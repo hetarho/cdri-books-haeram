@@ -3,8 +3,16 @@
 import { BookCard, EmptyBookPlaceholder, useListLikeBook, useUnlikeBook } from '@client/entities';
 import { Typography } from '@client/shared';
 export function LikePage() {
-  const { data: likeBooks } = useListLikeBook();
+  const { data: likeBooks, isLoading, isError } = useListLikeBook();
   const { mutate: unlikeBook } = useUnlikeBook();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
   return (
     <div className="flex min-h-0 w-full max-w-240 flex-1 flex-col items-start pt-16 pb-20">
       <Typography.Title2>내가 찜한 책</Typography.Title2>
@@ -29,9 +37,7 @@ export function LikePage() {
             isLiked={true}
           />
         ))}
-        {likeBooks?.length === 0 && (
-          <EmptyBookPlaceholder title="찜한 책이 없습니다." />
-        )}
+        {likeBooks?.length === 0 && <EmptyBookPlaceholder title="찜한 책이 없습니다." />}
       </div>
     </div>
   );
