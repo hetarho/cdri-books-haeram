@@ -1,21 +1,13 @@
-import { useCallback } from 'react';
-import { DEFAULT_STORAGE_KEY } from '../constant/config';
-import { useBookHistory } from './useBookHistory';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteBookHistoryAction } from '../api/delete-book-history.action';
 
 export function useDeleteBookHistory() {
-  const { getBookHistory } = useBookHistory();
+  const queryClient = useQueryClient();
 
-  const deleteBookHistory = useCallback(
-    (term: string) => {
-      if (typeof window === 'undefined') return;
-      const history = getBookHistory();
-      const value = term.trim();
-      if (!value) return;
-      const newHistory = history.filter((v) => v !== value);
-      localStorage.setItem(DEFAULT_STORAGE_KEY, JSON.stringify(newHistory));
+  return useMutation({
+    mutationFn: (term: string) => deleteBookHistoryAction(term),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['book-history'] });
     },
-    [getBookHistory],
-  );
-
-  return { deleteBookHistory };
+  });
 }

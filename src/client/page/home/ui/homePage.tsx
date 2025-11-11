@@ -11,7 +11,7 @@ import { BookSearch } from '@client/widget';
 export function HomePage() {
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState<BookSearchType>(BookSearchType.TITLE);
-  const { updateBookHistory } = useUpdateBookHistory();
+  const { mutate: updateBookHistory } = useUpdateBookHistory();
   const { mutate: likeBook } = useLikeBook();
   const { mutate: unlikeBook } = useUnlikeBook();
   const { data: likeBooks } = useListLikeBook();

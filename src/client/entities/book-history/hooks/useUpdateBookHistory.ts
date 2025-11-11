@@ -1,23 +1,13 @@
-'use client';
-
-import { useCallback } from 'react';
-import { DEFAULT_MAX_ITEMS, DEFAULT_STORAGE_KEY } from '../constant/config';
-import { useBookHistory } from './useBookHistory';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updateBookHistoryAction } from '../api/update-book-history.action';
 
 export function useUpdateBookHistory() {
-  const { getBookHistory } = useBookHistory();
+  const queryClient = useQueryClient();
 
-  const updateBookHistory = useCallback(
-    (term: string) => {
-      if (typeof window === 'undefined') return;
-      const history = getBookHistory();
-      const value = term.trim();
-      if (!value) return;
-      const newHistory = [value, ...history.filter((v) => v !== value)].slice(0, DEFAULT_MAX_ITEMS);
-      localStorage.setItem(DEFAULT_STORAGE_KEY, JSON.stringify(newHistory));
+  return useMutation({
+    mutationFn: (term: string) => updateBookHistoryAction(term),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['book-history'] });
     },
-    [getBookHistory],
-  );
-
-  return { updateBookHistory };
+  });
 }

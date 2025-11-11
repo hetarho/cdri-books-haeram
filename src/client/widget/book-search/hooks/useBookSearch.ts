@@ -24,19 +24,13 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
 
   const resetPopoverInput = useCallback(() => setPopoverSearch(''), []);
 
-  const { getBookHistory } = useBookHistory();
-  const { deleteBookHistory } = useDeleteBookHistory();
-  const [history, setHistory] = useState<string[]>([]);
+  const { data: history = [] } = useBookHistory();
+  const { mutate: deleteBookHistory } = useDeleteBookHistory();
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
-  const refreshHistory = useCallback(() => {
-    setHistory(getBookHistory());
-  }, [getBookHistory]);
-
   const openOverlay = useCallback(() => {
-    refreshHistory();
     setIsOverlayOpen(true);
-  }, [refreshHistory]);
+  }, []);
 
   const closeOverlay = useCallback(() => setIsOverlayOpen(false), []);
 
@@ -47,9 +41,8 @@ export function useBookSearch({ onSubmit }: UseBookSearchParams) {
   const handleDeleteHistory = useCallback(
     (item: string) => {
       deleteBookHistory(item);
-      refreshHistory();
     },
-    [deleteBookHistory, refreshHistory],
+    [deleteBookHistory],
   );
 
   const handleQuickSearch = useCallback(
