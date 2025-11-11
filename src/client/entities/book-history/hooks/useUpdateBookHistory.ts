@@ -9,6 +9,7 @@ export function useUpdateBookHistory() {
 
   const updateBookHistory = useCallback(
     (term: string) => {
+      if (typeof window === 'undefined') return;
       const history = getBookHistory();
       const value = term.trim();
       if (!value) return;
