@@ -2,7 +2,6 @@
 
 import { BookCard, EmptyBookPlaceholder, useListLikeBook, useUnlikeBook } from '@client/entities';
 import { Typography } from '@client/shared';
-import Image from 'next/image';
 export function LikePage() {
   const { data: likeBooks } = useListLikeBook();
   const { mutate: unlikeBook } = useUnlikeBook();
@@ -18,7 +17,7 @@ export function LikePage() {
       <div className="mt-6 flex w-full shrink-0 flex-col gap-4">
         {likeBooks?.map((book) => (
           <BookCard
-            key={book.url}
+            key={book.isbn}
             book={book}
             onClickBuyButton={() => {
               if (!book.url) return;
