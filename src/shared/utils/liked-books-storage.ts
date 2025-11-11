@@ -29,23 +29,7 @@ function writeLikedBooks(books: Book[]): void {
 }
 
 function isSameBook(a: Book, b: Book): boolean {
-  return (
-    a.title === b.title &&
-    a.description === b.description &&
-    a.price === b.price &&
-    (a.salePrice ?? null) === (b.salePrice ?? null) &&
-    arrayShallowEqual([...a.authors].sort(), [...b.authors].sort())
-  );
-}
-
-function arrayShallowEqual(a: string[], b: string[]): boolean {
-  if (a === b) return true;
-  if (!a || !b) return false;
-  if (a.length !== b.length) return false;
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) return false;
-  }
-  return true;
+  return a.isbn === b.isbn;
 }
 
 export function getLikedBooks(): Book[] {
@@ -66,4 +50,3 @@ export function removeLikedBook(book: Book): void {
   const next = liked.filter((b) => !isSameBook(b, book));
   writeLikedBooks(next);
 }
-
