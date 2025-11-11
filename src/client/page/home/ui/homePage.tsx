@@ -44,7 +44,7 @@ export function HomePage() {
       <div className="mt-6 flex w-full shrink-0 gap-4">
         <Typography.Caption>도서 검색 결과</Typography.Caption>
         <Typography.Caption>
-          총 <span className="text-primary font-bold">{data?.pages[0].totalCount}</span>건
+          총 <span className="text-primary font-bold">{data?.pages[0].totalCount ?? 0}</span>건
         </Typography.Caption>
       </div>
       <InfinityContainer
