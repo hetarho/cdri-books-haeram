@@ -51,10 +51,14 @@ export function HomePage() {
         className="mt-9 flex min-h-0 w-full flex-1 flex-col gap-4 overflow-y-auto"
         onReachBottom={books.length > 0 ? handleReachBottom : undefined}
       >
-        {books.map((book, index) => (
-          <BookCard key={`${book.title}-${index}`} book={book} onClickBuyButton={() => {
-            window.location.href = book.url;
-          }} />
+        {books.map((book) => (
+          <BookCard
+            key={book.url}
+            book={book}
+            onClickBuyButton={() => {
+              window.open(book.url, '_blank', 'noopener,noreferrer');
+            }}
+          />
         ))}
       </InfinityContainer>
     </div>
