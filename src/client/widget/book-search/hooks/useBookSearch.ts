@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { BookSearchType } from '@shared/types/book';
-import { useBookHistory } from '@client/entities';
-import { useDeleteBookHistory } from '@client/entities';
+import { useBookHistory, useDeleteBookHistory } from '@client/features';
 
 export type UseBookSearchParams = {
   onSubmit: (params: { search: string; searchType: BookSearchType }) => void;
